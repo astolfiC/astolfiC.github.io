@@ -38,16 +38,9 @@
         </div>
       </section>
 
-<<<<<<< HEAD
 
   <div id="sidebar">
       
-=======
-    </div>
-
-    <div id="sidebar">
-      <aside>
->>>>>>> 89b0dd227ccead7589b27b3430666b8a29fd9d1d
         <ul>
           <li>Designer</a>
             <ul>
@@ -60,10 +53,7 @@
               <li><a href="surf.html">Surf</a></li>
               <li><a href="chimera.html">Chimera</a></li>
               <li><a href="papiro.html">Papiro</a></li>
-<<<<<<< HEAD
               <li><a href="giugiaro_composition.html">Composition</a></li>
-=======
->>>>>>> 89b0dd227ccead7589b27b3430666b8a29fd9d1d
             </ul>
           </li>
           <li>Massoni Design</a>
@@ -71,10 +61,7 @@
               <li><a href="dining_table.html">Dining Table</a></li>
               <li><a href="leather_armchair.html">Leather Armchair</a></li>
               <li><a href="brumbury_lamp.html">Brumbury Lamp</a></li>
-<<<<<<< HEAD
               <li><a href="massoni_composition.html">Composition</a></li>
-=======
->>>>>>> 89b0dd227ccead7589b27b3430666b8a29fd9d1d
             </ul>
           </li>
           <li>Download</a>
@@ -85,54 +72,94 @@
             </ul>
           </li>
          </ul>
-<<<<<<< HEAD
       
     </div>
 
     
   <div id="main-content">
-=======
-      </aside>
-    </div>
 
-    <div class="wrapper">
-      <section id="main-content">
->>>>>>> 89b0dd227ccead7589b27b3430666b8a29fd9d1d
-        <h1><span class="octicon octicon-link"></span>Giugiaro Giorgetto</h1>
-          <br/>
-          <p>
-          Giorgetto Giugiaro is an italian designer, he was born in Garessio (7 August 1938). Famous for automotive design also specializes in industrial and trasport design.
-          </p>
-          <center><img src="images/Giugiaro.jpg"></center>
-          <p>
-          In 1968 he become an entrepreneur founding the Giugiaro Italdesign, company with the ambition to provide comprehensive services to the automotive industry,from the design of new cars in the early tests and assistence on several fronts.Currently the parent company has also developed a division, the Giugiaro Design whose activity is focused on industrial and transport design.
-          </p>
-          <p>
-          During his career, Giugiaro has received many honors in the national field with the conferment of the title of Cavaliere del Lavoro, with the awarding of an honorary degree, with the award of prizes such as the Golden Compass. His fame has crossed the national borders of a lot, in fact since 2002 is part of the Automotive Hall of Fame and in 1999 was awarded the title of Car Designer of the Century, conferred in Las Vegas by a panel of 120 journalists and international experts.
-          </p>
-<<<<<<< HEAD
-      </div>
+        <pre><code>
+/* Jug and Glass - Line Surf - Giugiaro Design */    
+/* Astolfi Cristiana - Final Project           */
+
+var domain = INTERVALS(1)(20);
+var dom_circolare = DOMAIN([[0,1],[0,2*PI]])([32,32]);
+var dom2D = DOMAIN([[0,1], [0,1]])([20, 20]);
+var dom3D = DOMAIN([[0,1], [0,1], [0,1]])([16, 16, 16]);
+
+function caraffa(){
+  /* manico caraffa */
+  var m1 = BEZIER(S0)([[3.62,0, 4.9], [4.74,0, 4.38], [4.03, 0,3.14], [3.62,0, 3.11]]);
+  var m2 = BEZIER(S0)([[3.62,0, 5.29], [5.11,0, 4.64], [4.48,0, 3.21], [3.62,0, 2.94]]);
+
+  var manico1 = CUBIC_HERMITE(S1)([m1,m2,[0,0.80,0],[0,-0.80,0]]);
+  var manico2 = CUBIC_HERMITE(S1)([m1,m2,[0,-0.80,0],[0,0.80,0]]);
+
+  var map_manico1 = MAP(manico1)(dom2D);
+  var map_manico2 = MAP(manico2)(dom2D);
+
+  var manico = STRUCT([map_manico1,map_manico2]);
+  var man = TRANSLATE([0,2])([-2.8,-1.9])(manico);
+
+  /* contenitore */
+  var contenitore = BEZIER(S0)([[0,0, 1.46], [3.96-2.8,0, 1.54], [3.61-2.8,0, 1.21],[3.63-2.8,0, 5.33],
+                [3.63-2.8,0, 5.33], [3.65-2.8,0, 5.49], [3.47-2.8,0, 5.46], [3.5-2.8,0, 5.32], 
+                [3.55-2.8,0, 1.19], [3.68-2.8,0, 1.62], [2.99-2.8,0, 1.52]]);
+
+  var mapping = ROTATIONAL_SURFACE(contenitore);
+  var surface = TRANSLATE([2])([-1.46])(MAP(mapping)(dom_circolare));
+
+  /* beccuccio */
+  var b1 = BEZIER(S0)([[2.52,0, 5.28], [2.50,0, 4.79], [3.13,0, 4.79], [3.04,0, 5.28]]);
+  var b2 = BEZIER(S0)([[2.52,-0.3, 5.28], [2.50,-0.3, 4.79], [3.13,-0.3, 4.79], [3.04,-0.3, 5.28]]);
+  var b3 = BEZIER(S0)([[2.52+0.05,0, 5.28], [2.50+0.05,0, 4.79+0.05], [3.13-0.05,0, 4.79+0.05], [3.04-0.05,0, 5.28]]);
+  var b4 = BEZIER(S0)([[2.52+0.05,-0.3, 5.28], [2.50+0.05,-0.3, 4.79+0.05], [3.13-0.05,-0.3, 4.79+0.05], [3.04-0.05,-0.3, 5.28]]);
+
+  var bec1 = BEZIER(S1)([b1,b2]);
+  var bec2 = BEZIER(S1)([b3,b4]);
+
+  var bec = BEZIER(S2)([bec1,bec2]);
+  var beccuccio =TRANSLATE([0,1,2])([-0.25-0.83,-2.75,-1.8])(ROTATE([0,1])(PI/2)(MAP(bec)(dom3D)));
+
+  var caraffa = COLOR([1.5,1.5,1.5, 0.60])(STRUCT([man,surface,beccuccio]));
+  return caraffa;
+}
+
+function bicchiere(){
+
+  var b1 = BEZIER(S0)([[2.65-2.1,0, 2.84], [2.68-2.1,0, 1.14], [2.75-2.1,0, 1.12], [0,0, 1.14]]);
+  var mapping = ROTATIONAL_SURFACE(b1);
+  var surface = TRANSLATE([0,2])([-2,-1.14])(MAP(mapping)(dom_circolare));
+
+  var m1 = BEZIER(S0)([[1.54,0, 1.44], [0.78,0, 1.39], [0.76,0, 2.52], [1.54,0, 2.58]]);
+  var m2 = BEZIER(S0)([[1.54,0, 1.31], [0.67,0, 1.27], [0.44,0, 2.56], [1.54,0, 2.78]]);
+
+  var manico1 = CUBIC_HERMITE(S1)([m1,m2,[0,0.60,0],[0,-0.60,0]]);
+  var manico2 = CUBIC_HERMITE(S1)([m1,m2,[0,-0.60,0],[0,0.60,0]]);
+
+  var map_manico1 = MAP(manico1)(dom2D);
+  var map_manico2 = MAP(manico2)(dom2D);
+
+  var manico = TRANSLATE([0,2])([-4.09,-1.11])(STRUCT([map_manico1,map_manico2]));
+
+  var bicchiere = COLOR([1.5,1.5,1.5, 0.60])(STRUCT([surface,manico]));
+  return bicchiere;
+}
+
+var model = STRUCT([caraffa(),bicchiere()]);
+DRAW(model);
+        </code></pre>
+
+
+    </div>
  </div>
      </br></br></br></br>
       
-=======
-      </section>
-
-    </div>
-
-    <div style="text-align: center">
->>>>>>> 89b0dd227ccead7589b27b3430666b8a29fd9d1d
       <footer>
         <span style="font-weight: bold;">Cristiana Astolfi, A.A. 2012-2013</span><br/>
       </footer>
-<<<<<<< HEAD
     
  
     
 </body>
 </html>
-=======
-    </div>
-  </body>
-</html>
->>>>>>> 89b0dd227ccead7589b27b3430666b8a29fd9d1d

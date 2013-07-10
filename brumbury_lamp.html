@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Italian Interior and Industrial Design by astolfiC</title>
+    <link rel="stylesheet" href="stylesheets/styles_mod.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+    <div id="header">
+      <nav>
+        <li class="fork"><a href="https://github.com/astolfiC/Final-Project">View On GitHub</a></li>
+      </nav>
+    </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1><b>Italian Interior and Industrial Design</b></h1>
+          <p>Computer Graphics Final Project</p>
+          <p>3D modeling by Cristiana Astolfi</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/astolfiC">astolfiC</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+          
+        </div>
+      </section>
+
+
+  <div id="sidebar">
+      
+        <ul>
+          <li>Designer</a>
+            <ul>
+              <li><a href="index.html">Giugiaro Giorgetto</a></li>
+              <li><a href="massoni_luigi.html">Massoni Luigi</a></li>
+            </ul>
+          </li>
+           <li>Giugiaro Design</a>
+            <ul>
+              <li><a href="surf.html">Surf</a></li>
+              <li><a href="chimera.html">Chimera</a></li>
+              <li><a href="papiro.html">Papiro</a></li>
+              <li><a href="giugiaro_composition.html">Composition</a></li>
+            </ul>
+          </li>
+          <li>Massoni Design</a>
+            <ul>
+              <li><a href="dining_table.html">Dining Table</a></li>
+              <li><a href="leather_armchair.html">Leather Armchair</a></li>
+              <li><a href="brumbury_lamp.html">Brumbury Lamp</a></li>
+              <li><a href="massoni_composition.html">Composition</a></li>
+            </ul>
+          </li>
+          <li>Download</a>
+            <ul>
+              <li class="zip_download_link"><a href="https://github.com/astolfiC/Final-Project/zipball/master">Download ZIP</a></li>
+              <li class="tar_download_link"><a href="https://github.com/astolfiC/Final-Project/tarball/master">Download TAR</a></li>
+              <div class="clearfix"></div>
+            </ul>
+          </li>
+         </ul>
+      
+    </div>
+
+    
+  <div id="main-content">
+
+        <h1><span class="octicon octicon-link"></span>Brumbury Lamp</h1>
+          <br/>
+          <p>
+          Designed by Luigi Massoni in 1970, was built for the Guzzini brothers.
+          The base, top and shade of the lamp can be switched on seperately, with 4 lightsources inside.
+          </p>
+          <center><img src="images/Massoni%20Design/brumbury3.jpg "></center>
+          </br>
+        <h2><span class="octicon octicon-link"></span>Model</h2>
+          <br/>
+          <center><a href="brumbury_lamp_code.html"><img src="images/screenshot/Massoni%20Design/Brumb1.png ">View code</a></center>
+          </br>
+          <h3><span class="octicon octicon-link"></span>Cable Switch and Socket</h3>
+        </br>
+          <p>
+           The cable is designed using Bezier to generate a profile and Hermite to build the surfaces so that they have a look round rather than flat.
+          </p>
+        </br>
+        <center><img src="images/screenshot/Massoni%20Design/cable.png "></center>
+      </br>
+          <p>
+          The structure of the switch and the respective surfaces are made using Bezier.
+          To create the buttons is used instead the function arc (that constructs a two-dimensional ring or circle) and the function Extrude to confer thickness.
+         </p>
+       </br>
+       <pre><code>
+/* Arco di circonferenza bidimensionale parametrico rispetto a due raggi */
+function arc (alpha, r, R){
+  var domain = DOMAIN([[0,alpha],[r,R]])([36,1]);
+  
+  var mapping = function(v) {
+    var a = v[0];
+    var r = v[1];
+    
+    return [r*COS(a), r*SIN(a)];
+  }
+  var model = MAP(mapping)(domain);
+  
+  return model;
+};
+       </code></pre>
+      </br>
+         <center><img src="images/screenshot/Massoni%20Design/switch.png "></center>
+         </br>
+         <p>
+            The socket is also a product of combination of Bezier and Hermite functions.
+          </p>
+          </br>
+          <center><img src="images/screenshot/Massoni%20Design/socket.png "></center>
+          </br>
+          <h3><span class="octicon octicon-link"></span>Light</h3>
+        </br>
+          <p>
+            To achieve the bulb has used the already known function creaSolidoRotazione, for the base instead was used the function arc (seen above).
+          </p>
+        </br>
+        <center><img src="images/screenshot/Massoni%20Design/lampadina.png "></center>
+      </br>
+      <h3><span class="octicon octicon-link"></span>Lamp</h3>
+    </br>
+    <p>
+    Both the base of the lamp, that the top were made with a combination of all the above functions: Bezier, arc, Extrude and creaSolidoRotazione.
+    </p>
+    </br>
+        <center><img src="images/screenshot/Massoni%20Design/lamp.png "></center>
+      </br>
+    <p>
+    As the last detail finally the screws located in the upper part of the lamp's stem have been made as small spheres using the function shown below:
+    </p>
+  </br>
+    <pre><code>
+/* funzione che crea una sfera di raggio r */
+var sphere = function(r) {
+  var domain = DOMAIN([[0, PI], [0, 2*PI]])([30,30]);
+
+  var mapping = function(v) {
+    var a = v[0];
+    var b = v[1];
+
+    var u = r*SIN(a)*COS(b);
+    var v = r*SIN(a)*SIN(b);
+    var w = r*COS(a);
+
+    return [u,v,w];
+  }
+  return MAP(mapping)(domain)
+}
+       </code></pre>
+     </br>
+
+    </div>
+ </div>
+     </br></br></br></br>
+      
+      <footer>
+        <span style="font-weight: bold;">Cristiana Astolfi, A.A. 2012-2013</span><br/>
+      </footer>
+    
+ 
+    
+</body>
+</html>
